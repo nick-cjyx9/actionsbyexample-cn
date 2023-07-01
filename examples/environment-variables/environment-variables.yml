@@ -3,47 +3,49 @@ on:
   push:
 
 # ::span-comment
-# Environment variables can be set for the entire workflow.
+# 环境变量可以在整个工作流中被定义，[命名规则](https://docs.github.com/zh/actions/learn-github-actions/variables#naming-conventions-for-configuration-variables)
 env:
-  VENI: 'I came'
+  VENI: 'I love Tennoji Rina!'
 # ::end-span
 
 jobs:
   use-env-vars:
     runs-on: ubuntu-latest
     # ::span-comment
-    # Environment variables can be set for specific jobs.
+    # 环境变量可以在特定jobs内定义。
     env:
-      VIDI: 'I saw'
+      VIDI: 'I love Tennoji Rina!!'
     # ::end-span
     steps:
       -
         name: Show me the vars
-        # Use your operating system's normal method for reading
-        # environment variables.
+        # 使用你的操作系统的正常方法进行环境变量读取
         run: echo "$VENI, $VIDI, $VICI"
-        # Environment variables can be set for individual `step`s.
+        # 环境变量可以在独立的step内定义。
         env:
-          VICI: 'I conquered'
+          VICI: 'I love Tennoji Rina!!!'
 
       -
         name: Create env var
-        # Set new environment variables by appending a line
-        # to a file whose name is in the `GITHUB_ENV` variable. The variable
-        # will be available in all subsequent `step`s.
-        # Note: the environment won't be updated according to `GITHUB_ENV` until the next step.
-        run: echo "foo=bar" >> $GITHUB_ENV
-
+        # 你也可以通过`echo "{environment_variable_name}={value}" >> "$GITHUB_ENV" `的形式设置新的环境变量。
+        # Note: 通过这种方式定义或更新的环境变量在定义它的step内不会更新值，后续steps内均可使用。
+        run: echo "foo=bar" >> "$GITHUB_ENV"
+      -
+        name: Special env var: secrets
+        # （此段为译者加）对于github token之类的私密变量，
+        # 我们可以在存储库的`Settings/Secrets`设置中添加机密(secrets)（例子中secret名为ACCESS_TOKEN），可通过以下方式读取。
+        # 一般情况下，我们不会也不建议输出机密，此处仅做展示。
+        run: echo ${{ secrets.ACCESS_TOKEN }}
       -
         name: Useful default vars
         run: |
 
         # ::span-comment
-        # There are many environment variables available by default.
-        # Here are a few, [see a full list here](https://docs.github.com/en/actions/reference/environment-variables#default-environment-variables).
-          echo "Workflow name:  $GITHUB_WORKFLOW"
+        # 官方提供了很多默认环境变量
+        # 这里只列举了一部分, [在这里查阅全部](https://docs.github.com/zh/actions/reference/environment-variables#default-environment-variables).
+          echo "工作流名称：  $GITHUB_WORKFLOW"
           echo "Workspace:      $GITHUB_WORKSPACE"
-          echo "Event:          $GITHUB_EVENT_NAME"
+          echo "事件名：          $GITHUB_EVENT_NAME"
           echo "SHA:            $GITHUB_SHA"
           echo "Ref:            $GITHUB_REF"
         # ::end-span
