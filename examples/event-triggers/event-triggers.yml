@@ -1,33 +1,31 @@
 name: event-triggers-example
 
-# The `on` section defines what events trigger the workflow.
-# For an exhaustive list of events and their types, [see here](https://docs.github.com/en/actions/reference/events-that-trigger-workflows#webhook-events).
+# `on`单元定义了什么行为将触发工作流。
+# [这里](https://docs.github.com/zh/actions/reference/events-that-trigger-workflows#webhook-events)详尽地列举了所有触发器。
 on:
-  # Trigger on push to the remote repo
+  # 推送到远程版本库时的触发器。
   push:
-    # Optionally include `branches` to trigger the workflow 
-    # only on branches that match the given patterns.
+    # 可选地包括`branches`参数，限制只有推送至指定的分支才能触发工作流
     branches: 
       - 'develop'
-      # A `*` matches zero or more characters, but not the `/` character.
-      # E.g. matches `refs/heads/foo/abc` but not `refs/heads/foo/abc/123`.
+      # 单个`*` 匹配0到多个字符（不包括'/'字符）。
+      # 这个例子匹配了`refs/heads/foo/abc`而不是`refs/heads/foo/abc/123`。
       - 'foo/*'
-      # A `**` matches zero or more of any character
-      # E.g. matches `refs/heads/foo/abc` _and_ `refs/heads/foo/abc/123`.
+      # `**`匹配0到多个字符 （无限制）
+      # 这个例子匹配了`refs/heads/foo/abc` _和_ `refs/heads/foo/abc/123`。
       - 'foo/**'
-      # `!` negates a match. E.g. excludes `refs/heads/foo/abc/456`.
-      # More on negative patterns [here](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#example-using-positive-and-negative-patterns). 
+      # `!` 否定了一个匹配。这个例子排除了 `refs/heads/foo/abc/456`.
+      # 关于更多否定匹配的使用：[了解更多](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#example-using-positive-and-negative-patterns). 
       - '!foo/*/456'
-    # Optionally include `tags` to trigger the workflow
-    # only on tags that match the given patterns
+    # 可选地使用`tags`来触发工作流。（仅限于匹配指定规则的tag。）
     tags:
       - '*'
-  # Trigger on pull requests
+  # 触发Pull Request
   pull_request:
     branches:
-      # Pull requests into `develop` branch
+      # 向`develop`分支发起PR
       - 'develop'
-  # Trigger on a schedule, specified with [POSIX cron syntax](https://crontab.guru/)
+  # 使用[corn](https://crontab.guru/)语法，定时触发
   schedule:
     - cron: '*/15 * * * *'
 
@@ -38,7 +36,7 @@ jobs:
     steps:
       -
         name: Event
-        # This is a [default environment variable](https://docs.github.com/en/actions/learn-github-actions/environment-variables#default-environment-variables) present in all Actions. 
+        # `$GITHUB_EVENT_NAME`一类的变量是所有action中均存在的[默认环境变量](https://docs.github.com/zh/actions/learn-github-actions/environment-variables#default-environment-variables)。
         run: echo "Triggered by: $GITHUB_EVENT_NAME"
       -
         name: Say Hello
