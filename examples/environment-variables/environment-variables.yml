@@ -27,8 +27,7 @@ jobs:
 
       -
         name: Create env var
-        # 你也可以通过`echo "{environment_variable_name}={value}"
-        # >> "$GITHUB_ENV" `的形式设置新的环境变量。
+        # 你也可以通过这种形式设置新的环境变量。
         # Note: 通过这种方式定义或更新的环境变量在定义它的step内不会更新值，后续steps内均可使用。
         run: echo "foo=bar" >> "$GITHUB_ENV"
       -
