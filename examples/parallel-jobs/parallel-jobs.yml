@@ -1,4 +1,4 @@
-# You can run multiple jobs. These are run in parallel by default.
+#  你可以运行多个jobs。默认情况下，这些jobs是平行地运行的。
 
 name: parallel-jobs
 on:
@@ -8,8 +8,8 @@ jobs:
   job-a:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Doing work"
+      - run: echo "干活"
   job-b:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "More work at the same time"
+      - run: echo "干更多的活"
