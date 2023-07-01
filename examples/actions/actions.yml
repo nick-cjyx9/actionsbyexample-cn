@@ -1,11 +1,11 @@
-# Actions reduce workflow `steps` by providing reusable "code"
-# for common tasks.
-# To run an action, you include the `uses` keyword
-# pointing to a GitHub repo with the pattern
-# `{owner}/{repo}@{ref}` or `{owner}/{repo}/{path}@{ref}`
-# if it's in a subdirectory. A `ref` can be a branch, tag, or SHA.
+# Actions 提供可重用的“代码”来减少工作流步骤。
+# 对于正常任务：
+# 使用 `uses` 关键词运行一个 action
+# 使用以下格式指向一个GitHub仓库
+# `{仓库持有者id}/{仓库名}@{ref}` or `{仓库持有者id}/{仓库名}/{路径}@{ref}`
+# 如果工作流位于子目录下，`ref` 可以是分支(branch)，标签(tag)或者SHA。
 # ::newline
-# GitHub officially supports many common actions. See the full list [here](https://github.com/actions)
+# GitHub官方提供了许多常用的actions。[详见](https://github.com/actions)
 
 name: actions-example
 on:
@@ -15,12 +15,12 @@ jobs:
   use-actions:
     runs-on: ubuntu-latest
     steps:
-      # The `checkout` action checks out your repo into the working directory at the ref which triggered the workflow (e.g. a branch that was pushed).
+      # `checkout` 检出你的仓库（触发工作流的ref）文件至工作目录（例：被推送的分支）。
       - uses: actions/checkout@v2
-      # The `setup-node` action makes node and npm available in the following steps.
+      # `setup-node` 使npm和node在接下来的步骤中可用。
       - uses: actions/setup-node@v1
         # ::span-comment
-        # Some actions also have required or optional arguments.
+        # 一些actions也需要可选的或必须的参数。
         with:
           node-version: '15.8.0'
         # ::end-span
