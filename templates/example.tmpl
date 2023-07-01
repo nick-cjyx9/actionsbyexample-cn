@@ -2,19 +2,18 @@
 <html>
 <head>
     <title>{{.Name}} - GitHub Actions by Example</title>
-    <meta name="description" content="GitHub Actions by Example is an introduction to the service through annotated examples."/>
+    <meta name="description" content="GitHub Actions by Example 是通过带注释的例子介绍 Github Actions 的说明书。"/>
     <meta property="og:title" content="{{.Name}} - GitHub Actions by Example">
-    <meta property="og:description" content="GitHub Actions by Example is an introduction to the service through annotated examples.">
+    <meta property="og:description" content="GitHub Actions by Example 是通过带注释的例子介绍 Github Actions 的说明书。">
     <meta property="og:url" content="https://www.actionsbyexample.com/">
     <meta property="og:site_name" content="GitHub Actions by Example">
     <meta name="twitter:title" content="{{.Name}} - GitHub Actions by Example">
-    <meta name="twitter:description" content="GitHub Actions by Example is an introduction to the service through annotated examples.">
+    <meta name="twitter:description" content="GitHub Actions by Example 是通过带注释的例子介绍 Github Actions 的说明书。">
     <meta name="twitter:creator" content="@macint0shpie">
     <meta name="twitter:card" content="summary_large_image">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Roboto+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/lxgw-wenkai-screen-webfont/1.7.0/style.min.css" />
     <link href="default.css" rel="stylesheet">
-    <link href="/static/site.css" rel="stylesheet">
+    <link href="site.css" rel="stylesheet">
 </head>
 <body>
 <div class="main_container">
@@ -43,11 +42,11 @@
     </table>
     {{if .NextExample}}
     <p>
-        Next example: <a href="{{.NextExample.Id}}.html">{{.NextExample.Name}}</a>
+        下一个例子：<a href="{{.NextExample.Id}}.html">{{.NextExample.Name}}</a>
     </p>
     {{end}}
 </div>
-<p class="footer">By <a href="https://macintoshpie.github.io">Ted Summer</a> | <a href="https://github.com/macintoshpie/ghactionsbyexample">Source</a> | Inspired by <a href="https://gobyexample.com">Go by Example</a></p>
+<p class="footer">By <a href="https://macintoshpie.github.io">Ted Summer</a> | <a href="https://github.com/macintoshpie/ghactionsbyexample">源代码</a> | Inspired by <a href="https://gobyexample.com">Go by Example</a> | 翻译：<a href="https://github.com/nick-cjyx9">Nick Chen</a></p>
 </div>
 <script>
     const yamlBody = `{{.FullCode}}`
