@@ -76,12 +76,10 @@ pre { line-height: 125%; }
 .highlight {
     background: inherit;
 }
-
 body {
     line-height: 1.1rem;
-    font-family: 'Libre Baskerville', serif;
+    font-family: "LXGW WenKai Screen", sans-serif;
 }
-
 a {
     color: inherit;
 }
