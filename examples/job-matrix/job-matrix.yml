@@ -1,5 +1,5 @@
-# You can run multiple jobs with different configurations by using a job `matrix`.
-# Note that jobs defined by a `matrix` run in parallel by default.
+# 你可以使用矩阵(matrix)来以不同的配置运行多个相同的jobs
+# 注意：使用矩阵配置的jobs默认平行运行
 
 name: job-matrix
 on:
@@ -9,17 +9,17 @@ jobs:
   my-job:
     strategy:
       # ::span-comment
-      # The `matrix` keyword is how you define a job matrix.
-      # Each user-defined key is a matrix parameter, here we've defined two: `os` and `node`.
-      # The list of possible values for each parameter are used in a [cartesian product](https://en.wikipedia.org/wiki/Cartesian_product) to create jobs.
-      # This section defines a 2 x 3 matrix of 6 jobs, each with a different combination of `os` and `node`.
+      # 使用 `matrix` 关键字定义矩阵
+      # 每一个用户给定的键值都是一个矩阵的参数，在这里我们定义了两个参数: `os` 和 `node`
+      # 可能的每种运行配置由每个参数集合的[笛卡尔乘积](https://baike.baidu.com/item/笛卡尔乘积/6323173)得来
+      # 这个例子定义了 2 x 3 的包含六个 job 的矩阵，每一种都是`os`和`node`参数的不同组合
       matrix:
         os: [ubuntu-16.04, ubuntu-18.04]
         node: [6, 8, 10]
       # ::end-span
 
         # ::span-comment
-        # The `exclude` keyword prevents jobs with specific configurations from running.
+        # `exclude` 关键字排除了特定的某个或某些配置组合，使它（们）不会运行
         exclude:
           -
             os: ubuntu-16.04
@@ -27,23 +27,21 @@ jobs:
         # ::end-span
 
         # ::span-comment
-        # `include` allows you to add new jobs to the `matrix`.
-        # Note that the `include` rules always evaluated after the `exclude` rules.
+        # `include` 关键字允许你向矩阵中追加 job(s)
+        # 注意：`include` 的生效在 `exclude` 之后
         include:
           -
             os: macos-latest
             node: 10
         # ::end-span
 
-    # Use `matrix` parameters to configure jobs.
-    # [Context expressions](index.html) are used to insert the parameter value.
-    # This example uses the `os` parameter to set the operating system of the job.
+    # 使用 `matrix` 参数配置 jobs
+    # [Context expressions](context-expressions.html) 用来插入参数值，例子中使用这种方式设置action的运行系统
     runs-on: ${{ matrix.os }}
     steps:
       -
         uses: actions/setup-node@2
         with:
-          # Setup node based on the matrix parameter `node`
           node-version: ${{ matrix.node }}
       - run: npm install
       - run: npm test
