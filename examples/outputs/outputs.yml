@@ -1,4 +1,4 @@
-# Data can be shared between `job`s and `step`s.
+# 可以在 `job`s 和 `step`s 之间共享数据
 
 name: outputs
 on:
@@ -11,23 +11,22 @@ jobs:
       -
         name: Do Work
         # ::span-comment
-        # Create outputs for a step by writing to stdout in the format of `::set-output name=<name>::<value>`.
-        # A step can have multiple outputs.
+        # 使用这种写入到stdout的形式为步骤(step)创造输出(outputs) `::set-output name=<name>::<value>`.
+        # 一个步骤中可能会有多个输出
         run: |
           echo '::set-output name=FAV_NUMBER::3'
           echo '::set-output name=FAV_COLOR::blue'
         # ::end-span
-        # Steps that create outputs must have unique ids.
+        # 创建输出的步骤必须具有独一无二的id
         id: abc
       -
         name: Read output
-        # Use the `steps` [context variable](context-variables.html) and step id to get the value
+        # 使用 `steps` [文本变量(context variable)](context-variables.html) 加步骤id以取得值
         run: |
           echo "${{steps.abc.outputs.FAV_NUMBER}}"
           echo "${{steps.abc.outputs.FAV_COLOR}}"
     # ::span-comment
-    # Create outputs for a job which will be available to other jobs that `needs` it (see [Job Ordering](job-ordering.html)).
-    # You can include output from `step`s that ran for the job.
+    # 为一个job创建的输出可以在其他的参数 `needs` 含有此 job 的 job 中可用(详见 [Job Ordering](job-ordering.html)).
     outputs:
       fav-animal: tiger
       fav-number: ${{steps.abc.outputs.FAV_NUMBER}}
@@ -38,7 +37,6 @@ jobs:
     needs: job1
     steps:
       # ::span-comment
-      # Use context expressions to grab outputs from a job included in `needs` (see [Job Ordering](job-ordering.html))
       - run: |
         echo "${{needs.job1.outputs.fav-animal}}"
         echo "${{needs.job1.outputs.fav-number}}"
