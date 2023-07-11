@@ -26,7 +26,7 @@ jobs:
   deploy:
     environment:
       name: github-pages
-      url: http://ikanata.eu.org/actionsbyexample/zh-cn/
+      url: http://nick-cjyx9.github.io/actions
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
